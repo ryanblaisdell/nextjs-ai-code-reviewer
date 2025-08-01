@@ -1,0 +1,3 @@
+customr react hooks for shared logic and state
+Example: Hook for managing review state and API call
+Zustand store etc
