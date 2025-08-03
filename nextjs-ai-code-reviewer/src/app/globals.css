@@ -15,8 +15,12 @@
 @media (prefers-color-scheme: dark) {
   :root {
     --background: #0a0a0a;
-    --foreground: #ededed;
+    --foreground: #797979;
   }
+}
+
+html, body, #__next {
+  overflow: hidden; /* preventing the page from scrolling we only want the chat scrolling */
 }
 
 body {
