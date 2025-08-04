@@ -1,4 +1,0 @@
-this is where our serverless functions could go
-
-instead of having the fastapi microservice run all of the time, we could containerize it and have Google Cloud Run deploy it 
-when the service is needed (when a user makes a request on the UI)
