@@ -6,6 +6,18 @@ import { useState } from 'react';
 
 export default function Home() {
 
+    //TODO: 
+  //      - add a new table in the mongodb table that will store the conversations
+  //      - add functionality to create new chats
+  //      - authentication
+  //      - claude model selection
+  //      - deploy the application
+  //      - create a settings page where the user can add to the system prompt to curate better prompts or tune the model
+  //      - stream response into the chat for a more seamless response
+  //      - global logging
+  //      - support uploading files to the LLM
+
+
   // test messages to see the layout of the messages
  const [messages, setMessages] = useState<ChatMessage[]>([
     {

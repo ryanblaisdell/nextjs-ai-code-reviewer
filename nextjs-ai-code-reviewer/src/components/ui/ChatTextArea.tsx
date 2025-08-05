@@ -2,15 +2,18 @@
 
 import { useRef, useEffect } from 'react';
 import { Box, Paper, Text, ScrollArea, Avatar } from '@mantine/core';
+import ReactMarkdown from 'react-markdown'
+import gfm from 'remark-gfm'
+import rehypeRaw from 'rehype-raw';
+import { CodeBlock } from './CodeBlock';
 
 export type ChatMessage = {
   role: 'user' | 'assistant' | 'system';
   content: string;
 };
 
-// Props for the ChatDisplay component
 type ChatDisplayProps = {
-  messages: ChatMessage[]; // The list of messages to display
+  messages: ChatMessage[];
 };
 
 export function ChatTextArea({ messages }: ChatDisplayProps) {
@@ -20,7 +23,7 @@ export function ChatTextArea({ messages }: ChatDisplayProps) {
     if (viewport.current) {
       viewport.current.scrollTo({ top: viewport.current.scrollHeight, behavior: 'smooth' });
     }
-  }, [messages]); // re-run effect when messages array changes
+  }, [messages]);
 
   return (
     <Paper
@@ -54,10 +57,18 @@ export function ChatTextArea({ messages }: ChatDisplayProps) {
                 className= "max-w-[70%] text-wrap break-words text-black"
                 style={{ borderRadius: '8px' }}
               >
-                <Text>{msg.content}</Text>
+                <Text>
+                  <ReactMarkdown
+                    remarkPlugins={[gfm]}
+                    rehypePlugins={[rehypeRaw]}
+                    components={{code: CodeBlock}}
+                  >
+                    {msg.content}
+                  </ReactMarkdown>
+                </Text>
               </Paper>
               {msg.role === 'user' && (
-                <Avatar radius="xl" color="blue" /> // inserting the user icon after the message so it will appear on the oppposite side
+                <Avatar radius="xl" color="blue" />
               )}
             </Box>
           ))
