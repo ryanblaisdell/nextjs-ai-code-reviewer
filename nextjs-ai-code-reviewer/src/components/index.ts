@@ -1,2 +1,2 @@
 export * from './ui'
-export * from './MartineProviders'
+export * from './ClientComponent'

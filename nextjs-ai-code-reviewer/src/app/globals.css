@@ -1,7 +1,7 @@
 @import "tailwindcss";
 
 :root {
-  --background: #ffffff;
+  --background: #171717;
   --foreground: #171717;
 }
 
@@ -27,4 +27,8 @@ body {
   background: var(--background);
   color: var(--foreground);
   font-family: Arial, Helvetica, sans-serif;
+}
+
+.mantine-Paper{
+  background-color: #797979 !important;
 }

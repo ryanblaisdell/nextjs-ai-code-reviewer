@@ -4,6 +4,7 @@ import { Textarea, Box, Button } from "@mantine/core";
 import { useCodeReviewApi } from "@/hooks";
 import { useState } from "react";
 import { ChatMessage } from "./ChatTextArea";
+import { useApplicationStore } from "@/hooks/useStore";
 
 // put this in a env file at some point
 const SYSTEM_PROMPT = `You are an expert Senior Software Engineer and a meticulous code reviewer. Please respond concisly and provide swift feedback. Please ensure that your response is accurate.`;
@@ -16,6 +17,8 @@ interface InputTextBoxProps {
 export function InputTextBox({ onApiError, onNewMessage }: InputTextBoxProps) {
     const [code, setCode] = useState('');
 
+    const { setError: setGlobalError, setIsLoading: setGlobalLoading, getIsLoading } = useApplicationStore();
+
     const {
         isLoading: apiIsLoading,
         generateReview,
@@ -27,8 +30,10 @@ export function InputTextBox({ onApiError, onNewMessage }: InputTextBoxProps) {
             onApiError("Please paste code to review.");
             return;
         }
-        setCode('')
+        setCode('');
+        setGlobalLoading(true);
         clearApiState();
+        setGlobalError(null);
 
         const userCodeMessage: ChatMessage = {
             role: 'user',
@@ -47,13 +52,14 @@ export function InputTextBox({ onApiError, onNewMessage }: InputTextBoxProps) {
         }
         } catch (err) {
             const errorMessage = `Error during review: ${err instanceof Error ? err.message : String(err)}`;
-            onApiError(errorMessage); 
+            onApiError(errorMessage);
+            setGlobalError(errorMessage)
             onNewMessage({ role: 'assistant', content: `Sorry, an error occurred: ${errorMessage}` });
         }
     };
 
    return (
-        <div className="absolute bottom-0 left-1/2 -translate-x-1/2 w-11/12 max-w-[700px] mb-4 ">
+        <div className="absolute bottom-0 left-1/2 -translate-x-1/2 w-1/2 w-screen">
             <Box className="p-4 rounded-lg shadow-lg bg-gray-700 border border-gray-600">
                 <Textarea
                     className="w-full bg-gray-700 border-gray-600 text-gray-100 focus:outline-none focus:ring-2 focus:ring-blue-500"
@@ -72,7 +78,7 @@ export function InputTextBox({ onApiError, onNewMessage }: InputTextBoxProps) {
                     mt="md"
                     className="bg-blue-600 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded-md"
                 >
-                    {apiIsLoading ? "Reviewing..." : "Send Message"}
+                    {getIsLoading() ? "Reviewing..." : "Send Message"}
                 </Button>
             </Box>
         </div>
