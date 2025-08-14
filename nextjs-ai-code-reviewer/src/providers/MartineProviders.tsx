@@ -1,10 +1,8 @@
-// nextjs-mantine-project/components/MantineProviders.tsx
-'use client'; // Still needs to be a Client Component
+'use client';
 
 import { MantineProvider, createTheme } from '@mantine/core';
 import '@mantine/core/styles.css'; // Don't forget this!
 
-// 1. Define your Mantine theme.
 const theme = createTheme({
   /** Customize your Mantine theme here */
   // Example: primaryColor: 'indigo',

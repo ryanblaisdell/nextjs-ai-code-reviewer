@@ -24,15 +24,19 @@ export default function ClientComponent() {
   };
 
   return (
-    <div className="font-sans grid items-center justify-items-center">
-      <main className="flex flex-col gap-[32px] row-start-2 items-center">
-        <ChatTextArea messages={messages} />
-        <InputTextBox 
-          onNewMessage={handleNewChatMessage}
-          onApiError={handleApiError}
-        />
+    <>
+      <div className="fixed top-4 left-4 z-50">
         <NewConversationButton />
-      </main>
-    </div>
+      </div>
+      <div className="font-sans grid items-center justify-items-center">
+        <main className="flex flex-col gap-[32px] row-start-2 items-center">
+          <ChatTextArea messages={messages} />
+          <InputTextBox 
+            onNewMessage={handleNewChatMessage}
+            onApiError={handleApiError}
+          />
+        </main>
+      </div>
+    </>
   );
 }

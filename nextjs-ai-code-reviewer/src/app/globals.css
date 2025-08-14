@@ -1,8 +1,8 @@
 @import "tailwindcss";
 
 :root {
-  --background: #171717;
-  --foreground: #171717;
+  --background: #364153;
+  --foreground: #364153;
 }
 
 @theme inline {
@@ -14,13 +14,14 @@
 
 @media (prefers-color-scheme: dark) {
   :root {
-    --background: #0a0a0a;
+    --background: #364153;
     --foreground: #797979;
   }
 }
 
 html, body, #__next {
-  overflow: hidden; /* preventing the page from scrolling we only want the chat scrolling */
+  height: 100%;
+  width: 100%;
 }
 
 body {
@@ -31,4 +32,8 @@ body {
 
 .mantine-Paper{
   background-color: #797979 !important;
+}
+
+.drawer-close-button:hover{
+  background-color: rgba(255, 255, 255, 0.1) !important;
 }

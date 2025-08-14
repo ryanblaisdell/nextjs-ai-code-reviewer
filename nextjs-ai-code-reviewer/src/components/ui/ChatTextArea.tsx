@@ -27,9 +27,8 @@ export function ChatTextArea({ messages }: ChatDisplayProps) {
 
   return (
     <Paper
-      shadow="lg"
       p="md"
-      className="absolute top-0 left-1/2 -translate-x-1/2 w-screen flex flex-col bg-gray-700"
+      className="absolute top-0 left-1/2 -translate-x-1/2 w-1/2 flex flex-col bg-gray-700"
       style={{
         bottom: `130px`, // manually setting the padding since ill die before i can perfect styling
         backgroundColor: "#364153"
@@ -47,7 +46,7 @@ export function ChatTextArea({ messages }: ChatDisplayProps) {
               }`}
             >
               {msg.role === 'assistant' && (
-                <Avatar radius="xl" color="green" />
+                <Avatar radius="xl" color="green" style={{ border: '1px solid grey' }}/>
               )}
               <Paper
                 shadow="xs"
@@ -64,7 +63,7 @@ export function ChatTextArea({ messages }: ChatDisplayProps) {
                   </ReactMarkdown>
               </Paper>
               {msg.role === 'user' && (
-                <Avatar radius="xl" color="blue" />
+                <Avatar radius="xl" color="blue" style={{ border: '1px solid grey' }}/>
               )}
             </Box>
           ))

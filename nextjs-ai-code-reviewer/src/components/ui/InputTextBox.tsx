@@ -59,8 +59,8 @@ export function InputTextBox({ onApiError, onNewMessage }: InputTextBoxProps) {
     };
 
    return (
-        <div className="absolute bottom-0 left-1/2 -translate-x-1/2 w-1/2 w-screen">
-            <Box className="p-4 rounded-lg shadow-lg bg-gray-700 border border-gray-600">
+        <div className="absolute bottom-0 left-1/2 -translate-x-1/2 w-1/2">
+            <Box className="p-4 bg-gray-700">
                 <Textarea
                     className="w-full bg-gray-700 border-gray-600 text-gray-100 focus:outline-none focus:ring-2 focus:ring-blue-500"
                     placeholder="Paste your message here..."
