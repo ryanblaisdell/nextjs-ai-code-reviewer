@@ -1,4 +1,4 @@
-'use client'; // This component will be a client component
+'use client';
 
 import {
   Anchor,
@@ -26,6 +26,8 @@ export function AuthenticationForm(props: PaperProps) {
   const [loading, setLoading] = useState(false);
   const [formError, setFormError] = useState<string | null>(null);
   const router = useRouter();
+
+  //const { setEmail } = useApplicationStore();
 
   const form = useForm({
     initialValues: {
@@ -56,6 +58,7 @@ export function AuthenticationForm(props: PaperProps) {
         setFormError(result.error);
       } else if (result?.ok) {
         // If login is successful, redirect manually
+        //setEmail(form.values.email);
         router.push('/');
         router.refresh();
       }
@@ -88,7 +91,8 @@ export function AuthenticationForm(props: PaperProps) {
           if (loginResult?.error) {
             setFormError(loginResult.error);
           } else if (loginResult?.ok) {
-            router.push('/');
+            //setEmail(form.values.email);
+            router.push('/chat');
             router.refresh();
           }
         } else {

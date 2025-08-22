@@ -1,8 +1,8 @@
 @import "tailwindcss";
 
 :root {
-  --background: #364153;
-  --foreground: #364153;
+  --background: #222222;
+  --foreground: #222222;
 }
 
 @theme inline {
@@ -14,8 +14,8 @@
 
 @media (prefers-color-scheme: dark) {
   :root {
-    --background: #364153;
-    --foreground: #797979;
+    --background: #222222;
+    --foreground: #222222;
   }
 }
 
@@ -25,7 +25,7 @@ html, body, #__next {
 }
 
 body {
-  background: var(--background);
+  background: linear-gradient(to bottom, #222222, #353535);
   color: var(--foreground);
   font-family: Arial, Helvetica, sans-serif;
 }

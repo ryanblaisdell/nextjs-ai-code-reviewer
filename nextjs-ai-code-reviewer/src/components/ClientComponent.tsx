@@ -1,27 +1,21 @@
 "use client";
 
-import { useState } from 'react';
+import { useEffect } from 'react';
 import { ChatTextArea, InputTextBox, NewConversationButton } from './ui';
-import { ChatMessage } from './ui';
+import { useApplicationStore } from '@/hooks/useStore';
 
-export default function ClientComponent() {
-  const [messages, setMessages] = useState<ChatMessage[]>([
-    {
-      role: 'assistant',
-      content: "Hello! I'm your AI Code Reviewer. Paste your code below and I'll provide feedback."
-    }
-  ]);
+interface ClientComponentProps {
+  userEmail: string | null
+}
 
-  const handleNewChatMessage = (message: ChatMessage) => {
-    setMessages(prevMessages => [...prevMessages, message]);
-  };
-
-  const handleApiError = (errorMessageText: string) => {
-    setMessages(prevMessages => [...prevMessages, {
-      role: 'system',
-      content: `Sorry, an error occurred: ${errorMessageText}`
-    }]);
-  };
+export default function ClientComponent({ userEmail }: ClientComponentProps) {
+  const { messages, setEmail } = useApplicationStore();
+  
+      useEffect(() => {
+        if (userEmail) {
+          setEmail(userEmail);
+        }
+      }, [userEmail, setEmail]);
 
   return (
     <>
@@ -31,10 +25,7 @@ export default function ClientComponent() {
       <div className="font-sans grid items-center justify-items-center">
         <main className="flex flex-col gap-[32px] row-start-2 items-center">
           <ChatTextArea messages={messages} />
-          <InputTextBox 
-            onNewMessage={handleNewChatMessage}
-            onApiError={handleApiError}
-          />
+          <InputTextBox />
         </main>
       </div>
     </>

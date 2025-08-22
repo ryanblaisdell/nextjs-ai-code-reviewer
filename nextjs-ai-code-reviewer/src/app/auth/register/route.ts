@@ -12,8 +12,6 @@ export async function POST(request: Request) {
     try {
         const { name, email, password } = await request.json();
 
-        console.log('Sending to FastAPI:', JSON.stringify({ name, email, password }));
-
         const response = await fetch(`${API_BASE_URL}/register`, {
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },

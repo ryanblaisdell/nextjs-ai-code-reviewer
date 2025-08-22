@@ -1,5 +1,7 @@
+'use client'
+
 import { useDisclosure } from '@mantine/hooks';
-import { Drawer, Button, Burger } from '@mantine/core';
+import { Drawer, Button, Burger, Divider } from '@mantine/core';
 
 export function NewConversationButton() {
   const [opened, { open, close }] = useDisclosure(false);
@@ -9,7 +11,7 @@ export function NewConversationButton() {
       <Drawer
         opened={opened}
         onClose={close}
-        title="AI Code Reviewer"
+        title="AI CODE REVIEWER"
         position='left'
         offset={8}
         radius="md"
@@ -38,7 +40,13 @@ export function NewConversationButton() {
           className: "drawer-close-button"
         }}
       >
-        <p>This is the content of the new conversation drawer.</p>
+        <Button 
+          variant="gradient"
+          gradient={{ from: 'blue', to: 'cyan', deg: 90 }}
+        >
+          New Conversation
+        </Button>
+        <Divider my="md"/>
       </Drawer>
 
       <Burger color='white' onClick={open} opened={opened} />
