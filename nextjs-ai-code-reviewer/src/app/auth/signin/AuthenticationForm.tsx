@@ -20,14 +20,14 @@ import { signIn } from 'next-auth/react';
 import { useRouter } from 'next/navigation';
 import { useState } from 'react';
 import bcrypt from 'bcryptjs';
+import { useApplicationStore } from '@/hooks/useStore';
 
 export function AuthenticationForm(props: PaperProps) {
   const [type, toggle] = useToggle(['login', 'register']);
   const [loading, setLoading] = useState(false);
   const [formError, setFormError] = useState<string | null>(null);
+  const { setEmail } = useApplicationStore();
   const router = useRouter();
-
-  //const { setEmail } = useApplicationStore();
 
   const form = useForm({
     initialValues: {
@@ -58,7 +58,7 @@ export function AuthenticationForm(props: PaperProps) {
         setFormError(result.error);
       } else if (result?.ok) {
         // If login is successful, redirect manually
-        //setEmail(form.values.email);
+        setEmail(form.values.email);
         router.push('/');
         router.refresh();
       }
@@ -91,7 +91,7 @@ export function AuthenticationForm(props: PaperProps) {
           if (loginResult?.error) {
             setFormError(loginResult.error);
           } else if (loginResult?.ok) {
-            //setEmail(form.values.email);
+            setEmail(form.values.email);
             router.push('/chat');
             router.refresh();
           }

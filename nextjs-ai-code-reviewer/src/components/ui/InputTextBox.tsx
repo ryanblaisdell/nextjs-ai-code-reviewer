@@ -3,7 +3,7 @@
 import { Textarea, Box, ActionIcon, Group } from "@mantine/core";
 import { useCodeReviewApi } from "@/hooks";
 import { useState } from "react";
-import { ChatMessage } from "./ChatTextArea";
+import { ChatMessage } from "@/lib";
 import { useApplicationStore } from "@/hooks/useStore";
 import { IconArrowUp } from '@tabler/icons-react';
 import { useRouter } from "next/navigation";
@@ -20,7 +20,6 @@ export function InputTextBox() {
     chat_id,
     setChatId,
     getEmail,
-    messages,
     addMessage
   } = useApplicationStore();
 
@@ -45,7 +44,6 @@ export function InputTextBox() {
 
     try {
       if (!chat_id) {
-        // First message → create a new chat
         const res = await fetch("/chat", {
           method: "POST",
           headers: { "Content-Type": "application/json" },
@@ -54,24 +52,18 @@ export function InputTextBox() {
 
         if (!res.ok) throw new Error(`Failed to create chat: ${res.statusText}`);
         const data = await res.json();
+
         setChatId(data.chat_id);
+        addMessage({ role: "assistant", content: data.message });
 
-        // Call generateReview for AI response
-        const aiResponse = await generateReview(userMessage.content, SYSTEM_PROMPT);
-        if (aiResponse?.response) {
-          addMessage({ role: "assistant", content: aiResponse.response });
-        }
-
-        // Redirect to new chat page
         router.push(`/chat/${data.chat_id}`);
       } else {
-        // Existing chat → send message
         const aiResponse = await generateReview(userMessage.content, SYSTEM_PROMPT);
+
         if (aiResponse?.response) {
           addMessage({ role: "assistant", content: aiResponse.response });
         }
 
-        // Persist message to backend
         await fetch(`/api/chat/${chat_id}`, {
           method: "POST",
           headers: { "Content-Type": "application/json" },
@@ -81,7 +73,7 @@ export function InputTextBox() {
     } catch (err) {
       const errorMessage = `Error: ${err instanceof Error ? err.message : String(err)}`;
       setError(errorMessage);
-      addMessage({ role: "assistant", content: `⚠️ ${errorMessage}` });
+      addMessage({ role: "assistant", content: `${errorMessage}` });
     } finally {
       setIsLoading(false);
     }

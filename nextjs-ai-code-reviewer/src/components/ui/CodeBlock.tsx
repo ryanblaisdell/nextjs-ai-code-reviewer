@@ -12,16 +12,8 @@ interface CodeBlockProps {
   [key: string]: any;
 }
 
-/**
- * This component will be used in the ChatTextArea component when rendering the LLM's API response.
- * 
- * It will pattern match the returned markdown response to find where there will be code blocks " '''language-java... ",
- * and then, for this instance, will return a styled div. Otherwise, it will return a typical component.
- * @param CodeBlockProps
- * @returns 
- */
 export function CodeBlock({ inline, className = '', children, ...props }: CodeBlockProps) {
-  const language = className.match(/language-(\w+)/)?.[1]; // thank you ai
+  const language = className.match(/language-(\w+)/)?.[1];
 
   if (!inline && language) {
     return (

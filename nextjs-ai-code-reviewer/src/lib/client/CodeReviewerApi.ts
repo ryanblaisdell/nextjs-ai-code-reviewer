@@ -2,6 +2,8 @@
 const API_BASE_URL = process.env.NEXT_PUBLIC_FASTAPI_URL || 'http://localhost:8000';
 
 export interface CodeReviewRequest {
+  chat_id: string;
+  email: string;
   user_prompt: string;
   max_tokens?: number;    
   temperature?: number;    
@@ -18,10 +20,14 @@ export interface CodeReviewResponse {
 }
 
 export async function generateCodeReview(
+  chat_id: string,
+  email: string,
   userPrompt: string,
   systemPrompt: string
 ): Promise<CodeReviewResponse> {
   const requestBody: CodeReviewRequest = {
+    chat_id: chat_id,
+    email: email,
     user_prompt: userPrompt,
     max_tokens: 1000, 
     temperature: 0.3,

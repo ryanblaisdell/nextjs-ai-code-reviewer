@@ -1,7 +1,7 @@
 "use client";
 
 import { useEffect } from 'react';
-import { ChatTextArea, InputTextBox, NewConversationButton } from './ui';
+import { ChatTextArea, InputTextBox } from '../ui';
 import { useApplicationStore } from '@/hooks/useStore';
 
 interface ClientComponentProps {
@@ -19,9 +19,6 @@ export default function ClientComponent({ userEmail }: ClientComponentProps) {
 
   return (
     <>
-      <div className="fixed top-4 left-4 z-50">
-        <NewConversationButton />
-      </div>
       <div className="font-sans grid items-center justify-items-center">
         <main className="flex flex-col gap-[32px] row-start-2 items-center">
           <ChatTextArea messages={messages} />

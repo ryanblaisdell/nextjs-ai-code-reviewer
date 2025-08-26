@@ -1,5 +1,5 @@
 import { create } from 'zustand'
-
+import { ChatMessage } from '@/lib'
 // the state of the application that we want to store ; add to this when more functionality is needed
 interface State {
   chatResult: string | null

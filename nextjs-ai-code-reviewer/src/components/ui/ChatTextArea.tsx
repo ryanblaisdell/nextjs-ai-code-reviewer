@@ -6,11 +6,7 @@ import ReactMarkdown from 'react-markdown'
 import gfm from 'remark-gfm'
 import rehypeRaw from 'rehype-raw';
 import { CodeBlock } from './CodeBlock';
-
-export type ChatMessage = {
-  role: 'user' | 'assistant' | 'system';
-  content: string;
-};
+import { ChatMessage } from '@/lib';
 
 type ChatDisplayProps = {
   messages: ChatMessage[];
@@ -28,7 +24,7 @@ export function ChatTextArea({ messages }: ChatDisplayProps) {
   return (
     <Paper
       p="md"
-      className="absolute top-0 left-1/2 -translate-x-1/2 w-1/2 flex flex-col"
+      className="absolute top-13 left-1/2 -translate-x-1/2 w-1/2 flex flex-col"
       style={{
         bottom: `130px`, // manually setting the padding since ill die before i can perfect styling
         backgroundColor: "transparent", 

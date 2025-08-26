@@ -16,11 +16,13 @@ export async function POST(req: Request) {
     
     const responseBody = await response.json();
 
+    console.log("Create New Convo: ", responseBody)
+
     if (!response.ok) {
         return NextResponse.json({ error: responseBody.detail }, { status: response.status });
     }
 
-    return NextResponse.json({ chat_id, response: "Conversation started" });
+    return NextResponse.json({ chat_id, message: responseBody.response, response: "Conversation started" });
   } catch (error) {
     console.log('[Conversation Retrieval Error]', error);
     return NextResponse.json({ error: "Failed to create chat" }, { status: 500 });

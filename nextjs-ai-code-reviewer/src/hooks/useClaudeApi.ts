@@ -4,6 +4,11 @@ import { useState, useCallback } from 'react'
 import { generateCodeReview, CodeReviewResponse } from '../lib/client/CodeReviewerApi'
 import { useApplicationStore } from './useStore' 
 
+/**
+ *  See if this can be turned into some route instead of a hook to follow the same paradigm as the rest of the API calls
+ */
+
+
 interface UseCodeReviewApiResult {
   isLoading: boolean;              
   error: string | null;            
@@ -18,7 +23,7 @@ export function useCodeReviewApi(): UseCodeReviewApiResult {
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState<string | null>(null);
 
-  const { setIsLoading: setGlobalIsLoading, setError: setGlobalError } = useApplicationStore();
+  const { setIsLoading: setGlobalIsLoading, setError: setGlobalError, email, chat_id } = useApplicationStore();
 
   const generateReview = useCallback(
     async (
@@ -31,8 +36,11 @@ export function useCodeReviewApi(): UseCodeReviewApiResult {
       setError(null);
       setGlobalError(null);
 
+      if (chat_id === null || email === null) return
+
       try {
-        const response = await generateCodeReview(userPrompt, systemPrompt);
+        const response = await generateCodeReview(chat_id, email, userPrompt, systemPrompt);
+        console.log("LLM response: ", response)
         return response;
       } catch (err) {
         const errorMessage = `API Error: ${err instanceof Error ? err.message : String(err)}`;
