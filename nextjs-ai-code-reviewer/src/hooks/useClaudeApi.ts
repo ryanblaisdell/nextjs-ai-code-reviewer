@@ -53,7 +53,7 @@ export function useCodeReviewApi(): UseCodeReviewApiResult {
       }
       return undefined;
     },
-    []
+    [chat_id, email, setGlobalError, setGlobalIsLoading]
   );
 
   const clearState = useCallback(() => {

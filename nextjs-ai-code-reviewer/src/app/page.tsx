@@ -10,11 +10,10 @@ export default async function Home() {
     redirect('/api/auth/signin');
   }
 
-  return (
-      <div className="font-sans grid items-center justify-items-center">
-        <main className="flex flex-col gap-[32px] row-start-2 items-center">
-          <LayoutClientComponent userEmail={session.user?.email ?? null}/>
-        </main>
-      </div>
-    );
-}
+return (
+  <div className="font-sans w-full min-h-screen">
+    <main className="flex flex-col gap-8 w-full items-stretch">
+      <LayoutClientComponent userEmail={session.user?.email ?? null} />
+    </main>
+  </div>
+)};

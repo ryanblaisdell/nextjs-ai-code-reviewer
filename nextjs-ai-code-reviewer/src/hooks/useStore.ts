@@ -1,5 +1,6 @@
 import { create } from 'zustand'
 import { ChatMessage } from '@/lib'
+
 // the state of the application that we want to store ; add to this when more functionality is needed
 interface State {
   chatResult: string | null
@@ -10,11 +11,6 @@ interface State {
   chat_id: string | null
   email: string | null
   messages: ChatMessage[]
-}
-
-interface ChatMessage {
-  role: "user" | "assistant" | "system"
-  content: string
 }
 
 // the actions that correspond with the state attributes we set

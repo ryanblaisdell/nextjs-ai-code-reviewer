@@ -23,7 +23,7 @@ export async function fetchAllConversations(
     }
 
     const data: Conversation[] = await response.json();
-    console.log(data)
+
     return data;
   } catch (error) {
     console.error(`Error fetching conversations for email: ${email} ; `, error);

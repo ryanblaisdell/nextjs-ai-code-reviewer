@@ -42,10 +42,10 @@ export function LayoutClientComponent({ userEmail }: LayoutClientComponentProps)
     };
 
     loadConversations();
-  }, []);
+  }, [email, setError, setIsLoading]);
 
-  return (
-    <AppShell
+    return (
+     <AppShell
       header={{ height: 60 }}
       navbar={{
         width: 280,
@@ -66,10 +66,7 @@ export function LayoutClientComponent({ userEmail }: LayoutClientComponentProps)
         </Group>
       </AppShell.Header>
 
-      
-
       <AppShell.Navbar p={0} style={{ backgroundColor: "#222222", borderRight: "1px solid #444c59" }}>
-        {/* Fixed button area */}
         <Box
             p="md"
             style={{
@@ -87,7 +84,6 @@ export function LayoutClientComponent({ userEmail }: LayoutClientComponentProps)
             </Button>
         </Box>
 
-        {/* Scrollable conversations list */}
         <ScrollArea
             h="100%"
             type="auto"
@@ -124,16 +120,10 @@ export function LayoutClientComponent({ userEmail }: LayoutClientComponentProps)
                     />
                   }
                   className={classes.myNavLinkHover}
-                  styles={(theme) => ({
-                    label: {
-                      color: 'white',
-                    },
-                    leftSection: {
-                      '& svg': {
-                        color: 'white',
-                      },
-                    },
-                  })}
+                  styles={{
+                    label: { color: 'white' },
+                    section: { color: 'white' },
+                  }}
                   my={4}
                 />
               ))}
@@ -142,7 +132,14 @@ export function LayoutClientComponent({ userEmail }: LayoutClientComponentProps)
         </ScrollArea>
         </AppShell.Navbar>
 
-      <AppShell.Main className='w-full'>
+      <AppShell.Main
+        style={{
+          display: 'flex',
+          flexDirection: 'column',
+          height: '100%',
+          width: "100%"
+        }}
+      >
         <ClientComponent userEmail={userEmail} />
       </AppShell.Main>
     </AppShell>

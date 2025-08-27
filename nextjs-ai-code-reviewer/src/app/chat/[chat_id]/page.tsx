@@ -15,11 +15,10 @@ export default function Chat() {
   //      - create new chat with button
   //      - ensure the chat is centered when the sidebar is open
 
-
   return (
-    <div className="font-sans grid items-center justify-items-center">
-      <main className="flex flex-col gap-[32px] row-start-2 items-center">
-        <LayoutClientComponent userEmail={getEmail()}/>
+    <div className="font-sans w-full min-h-screen">
+      <main className="flex flex-col gap-8 w-full items-stretch">
+        <LayoutClientComponent userEmail={getEmail()} />
       </main>
     </div>
   );

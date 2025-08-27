@@ -24,15 +24,25 @@ export function ChatTextArea({ messages }: ChatDisplayProps) {
   return (
     <Paper
       p="md"
-      className="absolute top-13 left-1/2 -translate-x-1/2 w-1/2 flex flex-col"
       style={{
-        bottom: `130px`, // manually setting the padding since ill die before i can perfect styling
-        backgroundColor: "transparent", 
+        backgroundColor: "transparent",
+        width: "100%",
+        height: "100%",
+        minWidth: 0,
+        minHeight: 0,
+        margin: 0,
+        display: "flex",
+        flexDirection: "column",
       }}
     >
-      <ScrollArea viewportRef={viewport} style={{ flexGrow: 1, height: '100%' }}>
+      <ScrollArea
+        viewportRef={viewport}
+        style={{ flex: 1, width: '100%', minWidth: 0, minHeight: '0' }}
+      >
         {messages.length === 0 ? (
-          <Text c="dimmed" ta="center" mt="xl" />
+          <Text c="dimmed" ta="center" mt="xl">
+            Start a new conversation!
+          </Text>
         ) : (
           messages.map((msg, index) => (
             <Box

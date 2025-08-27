@@ -3,6 +3,7 @@
 import { useEffect } from 'react';
 import { ChatTextArea, InputTextBox } from '../ui';
 import { useApplicationStore } from '@/hooks/useStore';
+import { Box, useMantineTheme } from '@mantine/core';
 
 interface ClientComponentProps {
   userEmail: string | null
@@ -10,21 +11,35 @@ interface ClientComponentProps {
 
 export default function ClientComponent({ userEmail }: ClientComponentProps) {
   const { messages, setEmail } = useApplicationStore();
+  const theme = useMantineTheme();
   
-      useEffect(() => {
-        if (userEmail) {
-          setEmail(userEmail);
-        }
-      }, [userEmail, setEmail]);
+  useEffect(() => {
+    if (userEmail) {
+      setEmail(userEmail);
+    }
+  }, [userEmail, setEmail]);
 
   return (
-    <>
-      <div className="font-sans grid items-center justify-items-center">
-        <main className="flex flex-col gap-[32px] row-start-2 items-center">
-          <ChatTextArea messages={messages} />
+    <Box
+      style={{
+        display: 'flex',
+        flexDirection: 'column',
+        height: '100%',
+        width: '100%',
+        paddingBottom: theme.spacing.md,
+        paddingLeft: theme.spacing.md,
+        paddingRight: theme.spacing.md,
+      }}
+    >
+      <Box style={{ flex: 1, minHeight: 0, minWidth: 0, width: '100%', overflow: 'hidden' }}>
+        <ChatTextArea messages={messages} />
+      </Box>
+
+      <Box style={{ width: '100%', display: 'flex', justifyContent: 'center', marginTop: theme.spacing.md }}>
+        <Box style={{ width: '100%', maxWidth: 900 }}>
           <InputTextBox />
-        </main>
-      </div>
-    </>
+        </Box>
+      </Box>
+    </Box>
   );
 }
