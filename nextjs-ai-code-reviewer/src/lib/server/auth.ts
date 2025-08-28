@@ -13,7 +13,7 @@ declare module "next-auth" {
       name?: string | null;
       email?: string | null;
       image?: string | null;
-    }
+    };
   }
 }
 
@@ -33,34 +33,39 @@ export const authOptions: NextAuthOptions = {
       name: "Credentials",
       credentials: {
         email: { label: "Email", type: "text" },
-        password: { label: "Password", type: "password" }
+        password: { label: "Password", type: "password" },
       },
       async authorize(credentials) {
-
-        console.log('[CredentialsProvider][DEBUG] Attempting to authorize with credentials:', credentials);
+        console.log(
+          "[CredentialsProvider][DEBUG] Attempting to authorize with credentials:",
+          credentials,
+        );
         const userFromDb = await getUserByEmail(credentials?.email);
 
-        if (!userFromDb) { 
-          console.log('[CredentialsProvider][DEBUG] Invalid credentials provided.');
-          throw new Error("No user was found with this email."); 
+        if (!userFromDb) {
+          console.log("[CredentialsProvider][DEBUG] Invalid credentials provided.");
+          throw new Error("No user was found with this email.");
         }
 
         const isValid = await bcrypt.compare(credentials!.password.trim(), userFromDb.password);
 
         if (!isValid) {
-          console.log('[CredentialsProvider][DEBUG] Password verification failed for:', credentials?.email);
+          console.log(
+            "[CredentialsProvider][DEBUG] Password verification failed for:",
+            credentials?.email,
+          );
           throw new Error("Invalid password.");
         }
 
-        console.log('[CredentialsProvider][DEBUG] User authorized');
+        console.log("[CredentialsProvider][DEBUG] User authorized");
         return {
           id: userFromDb._id.toString(),
           name: userFromDb.name || null,
           email: userFromDb.email || null,
-          image: userFromDb.image || null
+          image: userFromDb.image || null,
         };
-      }
-    })
+      },
+    }),
   ],
   pages: {
     signIn: "/auth/signin",
@@ -70,23 +75,23 @@ export const authOptions: NextAuthOptions = {
       if (user) {
         token.id = user.id;
 
-        console.log('[JWT Callback][DEBUG] Token after user data:', token);
+        console.log("[JWT Callback][DEBUG] Token after user data:", token);
       }
 
       return token;
     },
     async session({ session, token }): Promise<Session> {
       if (session.user) {
-          session.user.id = token.id;
+        session.user.id = token.id;
 
-          console.log('[Session Callback][DEBUG] Session after token data:', session);
+        console.log("[Session Callback][DEBUG] Session after token data:", session);
       }
       return session;
-    }
+    },
   },
   session: {
     strategy: "jwt",
     maxAge: 30 * 24 * 60 * 60, // 30 days
   },
   debug: process.env.NODE_ENV === "development",
-}; 
+};

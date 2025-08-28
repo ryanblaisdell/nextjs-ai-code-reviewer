@@ -1,8 +1,8 @@
-import 'server-only'
+import "server-only";
 import { MongoClient } from "mongodb";
 
 if (!process.env.MONGODB_URI) {
-    throw new Error("MongoDB connection URI is not defined or could not be found.");
+  throw new Error("MongoDB connection URI is not defined or could not be found.");
 }
 
 const mongodb_uri = process.env.MONGODB_URI;

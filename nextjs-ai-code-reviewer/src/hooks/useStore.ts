@@ -1,16 +1,16 @@
-import { create } from 'zustand'
-import { ChatMessage } from '@/lib'
+import { create } from "zustand";
+import { ChatMessage, Conversation } from "@/lib";
 
 // the state of the application that we want to store ; add to this when more functionality is needed
 interface State {
-  chatResult: string | null
-  error: string | null
-  isLoading: boolean
-  conversationId: string | null
-  userId: string | null
-  chat_id: string | null
-  email: string | null
-  messages: ChatMessage[]
+  chatResult: string | null;
+  error: string | null;
+  isLoading: boolean;
+  userId: string | null;
+  chat_id: string | null;
+  email: string | null;
+  messages: ChatMessage[];
+  conversations: Conversation[];
 }
 
 // the actions that correspond with the state attributes we set
@@ -18,13 +18,14 @@ interface StateActions {
   setChatResult: (result: string) => void;
   setError: (errorMessage: string | null) => void;
   setIsLoading: (loading: boolean) => void;
-  setConversationId: (id: string) => void;
   setUserId: (id: string) => void;
-  setChatId: (id: string) => void;
+  setChatId: (id: string | null) => void;
   setEmail: (email: string) => void;
 
   clearMessages: () => void;
   addMessage: (msg: ChatMessage) => void;
+  setMessages: (msgs: ChatMessage[]) => void;
+  setConversations: (convs: Conversation[]) => void;
 
   getIsLoading: () => boolean;
   getEmail: () => string | null;
@@ -34,7 +35,7 @@ interface StateActions {
 
 type Store = State & StateActions;
 
-// basic zustand store that will manage the state with these actions 
+// basic zustand store that will manage the state with these actions
 export const useApplicationStore = create<Store>((set, get) => ({
   chatResult: null,
   error: null,
@@ -44,28 +45,29 @@ export const useApplicationStore = create<Store>((set, get) => ({
   chat_id: null,
   email: null,
   messages: [],
+  conversations: [],
 
   setChatResult: (result) => set({ chatResult: result, error: null }),
   setError: (errorMessage) => set({ error: errorMessage, chatResult: null }),
   setIsLoading: (loading) => set({ isLoading: loading }),
-  setConversationId: (id) => set({ conversationId: id }),
-  setUserId: (id) => set({ userId: id}),
-  setChatId: (id) => set({ chat_id: id}),
-  setEmail: (email) => set({ email: email}),
+  setUserId: (id) => set({ userId: id }),
+  setChatId: (id) => set({ chat_id: id }),
+  setEmail: (email) => set({ email: email }),
 
   getIsLoading: () => get().isLoading,
   getChatId: () => get().chat_id,
   getEmail: () => get().email,
 
-  addMessage: (msg) =>
-    set((state) => ({ messages: [...state.messages, msg] })),
+  addMessage: (msg) => set((state) => ({ messages: [...state.messages, msg] })),
+  setMessages: (msgs) => set({ messages: msgs }),
   clearMessages: () => set({ messages: [] }),
+  setConversations: (convs) => set({ conversations: convs }),
 
-  clearAllState: () => set({
-    chatResult: null,
-    error: null,
-    isLoading: false,
-    conversationId: null,
-    userId: null,
-  }),
+  clearAllState: () =>
+    set({
+      chatResult: null,
+      error: null,
+      isLoading: false,
+      userId: null,
+    }),
 }));

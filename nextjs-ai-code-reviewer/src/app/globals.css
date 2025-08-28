@@ -19,7 +19,9 @@
   }
 }
 
-html, body, #__next {
+html,
+body,
+#__next {
   height: 100%;
   width: 100%;
 }
@@ -30,10 +32,10 @@ body {
   font-family: Arial, Helvetica, sans-serif;
 }
 
-.mantine-Paper{
+.mantine-Paper {
   background-color: #797979 !important;
 }
 
-.drawer-close-button:hover{
+.drawer-close-button:hover {
   background-color: rgba(255, 255, 255, 0.1) !important;
 }

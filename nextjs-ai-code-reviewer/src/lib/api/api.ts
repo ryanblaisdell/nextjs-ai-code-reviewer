@@ -5,7 +5,7 @@ interface FetchConversationsOptions {
 }
 
 export async function fetchAllConversations(
-  options: FetchConversationsOptions
+  options: FetchConversationsOptions,
 ): Promise<Conversation[] | null> {
   const { email } = options;
 
@@ -18,8 +18,12 @@ export async function fetchAllConversations(
     const response = await fetch(`/api/all-chats?email=${encodeURIComponent(email)}`);
 
     if (!response.ok) {
-      const errorData = await response.json().catch(() => ({ message: 'Failed to parse error response' }));
-      throw new Error(`Failed to fetch conversations: ${response.status} - ${errorData.message || 'Unknown error'}`);
+      const errorData = await response
+        .json()
+        .catch(() => ({ message: "Failed to parse error response" }));
+      throw new Error(
+        `Failed to fetch conversations: ${response.status} - ${errorData.message || "Unknown error"}`,
+      );
     }
 
     const data: Conversation[] = await response.json();

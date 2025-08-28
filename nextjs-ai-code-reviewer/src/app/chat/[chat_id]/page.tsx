@@ -1,11 +1,11 @@
-'use client'
+"use client";
 
-import { LayoutClientComponent } from "@/components/pages/LayoutClientComponent";
+import { ChatApplicationShell } from "@/components/pages/LayoutClientComponent";
 import { useApplicationStore } from "@/hooks/useStore";
 
 export default function Chat() {
   const { getEmail } = useApplicationStore();
-  //TODO: 
+  //TODO:
   //      - claude model selection
   //      - deploy the application
   //      - create a settings page where the user can add to the system prompt to curate better prompts or tune the model
@@ -13,12 +13,12 @@ export default function Chat() {
   //      - global logging
   //      - support uploading files to the LLM
   //      - create new chat with button
-  //      - ensure the chat is centered when the sidebar is open
+  //      - implement max chats for users
 
   return (
     <div className="font-sans w-full min-h-screen">
       <main className="flex flex-col gap-8 w-full items-stretch">
-        <LayoutClientComponent userEmail={getEmail()} />
+        <ChatApplicationShell userEmail={getEmail()} />
       </main>
     </div>
   );

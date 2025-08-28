@@ -1,33 +1,23 @@
-'use client'
+"use client";
 
 import { Textarea, Box, ActionIcon, Group } from "@mantine/core";
 import { useCodeReviewApi } from "@/hooks";
 import { useState } from "react";
 import { ChatMessage } from "@/lib";
 import { useApplicationStore } from "@/hooks/useStore";
-import { IconArrowRight, IconSearch } from '@tabler/icons-react';
+import { IconArrowRight, IconSearch } from "@tabler/icons-react";
 import { useRouter } from "next/navigation";
 
 const SYSTEM_PROMPT = `You are an expert Senior Software Engineer and a meticulous code reviewer. Please respond concisely and provide swift feedback. Please ensure that your response is accurate.`;
 
 export function InputTextBox() {
-  const [code, setCode] = useState('');
+  const [code, setCode] = useState("");
   const router = useRouter();
 
-  const { 
-    setError, 
-    setIsLoading,
-    chat_id,
-    setChatId,
-    getEmail,
-    addMessage
-  } = useApplicationStore();
+  const { setError, setIsLoading, chat_id, setChatId, getEmail, addMessage } =
+    useApplicationStore();
 
-  const { 
-    isLoading: apiIsLoading,
-    generateReview,
-    clearState: clearApiState 
-  } = useCodeReviewApi();
+  const { isLoading: apiIsLoading, generateReview, clearState: clearApiState } = useCodeReviewApi();
 
   const handleSend = async () => {
     if (!code.trim()) {
@@ -80,10 +70,9 @@ export function InputTextBox() {
   };
 
   return (
-  <Box style={{ width: '100%', maxWidth: '900px', margin: '0 auto', display: 'flex' }}>
-    <Group align="flex-end" style={{ width: '100%' }}>
+    <Box style={{ width: "100%", maxWidth: "900px", margin: "0 auto", display: "flex" }}>
+      <Group align="flex-end" style={{ width: "100%" }}>
         <Textarea
-         
           className="flex-grow focus:outline-none focus:ring-2 focus:ring-gray-500"
           placeholder="Paste your message here..."
           autosize
@@ -105,7 +94,7 @@ export function InputTextBox() {
                 borderColor: "#6b7280",
               },
               paddingTop: 10,
-              paddingBottom: 10
+              paddingBottom: 10,
             },
           }}
           leftSection={<IconSearch size={18} stroke={1.5} />}

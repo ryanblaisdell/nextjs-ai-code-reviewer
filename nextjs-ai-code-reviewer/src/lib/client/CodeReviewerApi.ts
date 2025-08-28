@@ -1,14 +1,14 @@
 // set this in an env file
-const API_BASE_URL = process.env.NEXT_PUBLIC_FASTAPI_URL || 'http://localhost:8000';
+const API_BASE_URL = process.env.NEXT_PUBLIC_FASTAPI_URL || "http://localhost:8000";
 
 export interface CodeReviewRequest {
   chat_id: string;
   email: string;
   user_prompt: string;
-  max_tokens?: number;    
-  temperature?: number;    
+  max_tokens?: number;
+  temperature?: number;
   model?: string;
-  system_prompt?: string;  
+  system_prompt?: string;
 }
 
 export interface CodeReviewResponse {
@@ -23,23 +23,23 @@ export async function generateCodeReview(
   chat_id: string,
   email: string,
   userPrompt: string,
-  systemPrompt: string
+  systemPrompt: string,
 ): Promise<CodeReviewResponse> {
   const requestBody: CodeReviewRequest = {
     chat_id: chat_id,
     email: email,
     user_prompt: userPrompt,
-    max_tokens: 1000, 
+    max_tokens: 1000,
     temperature: 0.3,
-    model: 'claude-3-haiku-20240307',
+    model: "claude-3-haiku-20240307",
     system_prompt: systemPrompt,
   };
 
   try {
     const response = await fetch(`${API_BASE_URL}/generate`, {
-      method: 'POST',
+      method: "POST",
       headers: {
-        'Content-Type': 'application/json',
+        "Content-Type": "application/json",
       },
       body: JSON.stringify(requestBody),
     });
@@ -53,7 +53,7 @@ export async function generateCodeReview(
 
     return data;
   } catch (error) {
-    console.error('API call to /generate failed:', error);
+    console.error("API call to /generate failed:", error);
     throw error;
   }
 }
