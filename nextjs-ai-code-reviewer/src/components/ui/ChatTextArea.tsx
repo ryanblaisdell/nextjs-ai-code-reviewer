@@ -87,7 +87,7 @@ export function ChatTextArea({ messages }: ChatDisplayProps) {
                   padding: "1rem",
                 }}
               >
-                <Loader size="md" color="gray" type="dots"/>
+                <Loader size="md" color="gray" type="dots" />
               </Box>
             )}
           </>

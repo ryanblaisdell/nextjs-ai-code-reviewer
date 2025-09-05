@@ -24,7 +24,7 @@ interface StateActions {
   setChatId: (id: string | null) => void;
   setEmail: (email: string) => void;
   setName: (name: string) => void;
-  setProfileImage:(image: string) => void;
+  setProfileImage: (image: string) => void;
 
   clearMessages: () => void;
   addMessage: (msg: ChatMessage) => void;

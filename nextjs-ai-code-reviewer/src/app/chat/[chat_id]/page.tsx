@@ -13,8 +13,8 @@ export default function Chat() {
   //      - global logging
   //      - support uploading files to the LLM
   //      - implement max chats for users
-  //      - add some image storage for the profile pictures so that they can be stored in the session data or in the store and can be displayed 
-  // 
+  //      - add some image storage for the profile pictures so that they can be stored in the session data or in the store and can be displayed
+  //
 
   return (
     <div className="font-sans w-full min-h-screen">
