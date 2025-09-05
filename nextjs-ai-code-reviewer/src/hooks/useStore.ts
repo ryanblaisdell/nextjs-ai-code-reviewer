@@ -11,6 +11,8 @@ interface State {
   email: string | null;
   messages: ChatMessage[];
   conversations: Conversation[];
+  name: string | null;
+  profileImage: string | null;
 }
 
 // the actions that correspond with the state attributes we set
@@ -21,6 +23,8 @@ interface StateActions {
   setUserId: (id: string) => void;
   setChatId: (id: string | null) => void;
   setEmail: (email: string) => void;
+  setName: (name: string) => void;
+  setProfileImage:(image: string) => void;
 
   clearMessages: () => void;
   addMessage: (msg: ChatMessage) => void;
@@ -29,7 +33,9 @@ interface StateActions {
 
   getIsLoading: () => boolean;
   getEmail: () => string | null;
+  getName: () => string | null;
   getChatId: () => string | null;
+
   clearAllState: () => void;
 }
 
@@ -46,6 +52,8 @@ export const useApplicationStore = create<Store>((set, get) => ({
   email: null,
   messages: [],
   conversations: [],
+  name: null,
+  profileImage: null,
 
   setChatResult: (result) => set({ chatResult: result, error: null }),
   setError: (errorMessage) => set({ error: errorMessage, chatResult: null }),
@@ -53,10 +61,14 @@ export const useApplicationStore = create<Store>((set, get) => ({
   setUserId: (id) => set({ userId: id }),
   setChatId: (id) => set({ chat_id: id }),
   setEmail: (email) => set({ email: email }),
+  setName: (name) => set({ name: name }),
+  setProfileImage: (image) => set({ profileImage: image }),
 
   getIsLoading: () => get().isLoading,
   getChatId: () => get().chat_id,
   getEmail: () => get().email,
+  getName: () => get().name,
+  getProfileImage: () => get().profileImage,
 
   addMessage: (msg) => set((state) => ({ messages: [...state.messages, msg] })),
   setMessages: (msgs) => set({ messages: msgs }),

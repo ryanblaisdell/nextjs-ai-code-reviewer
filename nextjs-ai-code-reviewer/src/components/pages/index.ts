@@ -1,3 +1,3 @@
 export * from "./ClientComponent";
-export * from "./LayoutClientComponent";
+export * from "./ChatApplicationShell";
 export * from "./NavLink.module.css";

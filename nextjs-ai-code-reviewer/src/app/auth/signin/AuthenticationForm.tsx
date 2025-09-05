@@ -52,6 +52,8 @@ export function AuthenticationForm(props: PaperProps) {
         email: form.values.email,
         password: form.values.password,
       });
+      
+      console.log("RESULTS----", result)
 
       if (result?.error) {
         setFormError(result.error);

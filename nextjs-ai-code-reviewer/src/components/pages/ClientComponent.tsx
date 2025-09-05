@@ -10,7 +10,7 @@ interface ClientComponentProps {
 }
 
 export default function ClientComponent({ userEmail }: ClientComponentProps) {
-  const { chat_id, messages, setMessages, setEmail } = useApplicationStore();
+  const { chat_id, messages, setMessages, setEmail, setIsLoading, isLoading } = useApplicationStore();
   const theme = useMantineTheme();
 
   useEffect(() => {
@@ -25,6 +25,7 @@ export default function ClientComponent({ userEmail }: ClientComponentProps) {
     const fetchMessageContent = async () => {
       const res = await fetch(`/api/chat/${chat_id}?email=${userEmail}`);
       const data = await res.json();
+      setIsLoading(false)
       setMessages(data.messages);
     };
 

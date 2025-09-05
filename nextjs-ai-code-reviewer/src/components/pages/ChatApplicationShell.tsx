@@ -9,6 +9,7 @@ import ClientComponent from "@/components/pages/ClientComponent";
 import { useApplicationStore } from "@/hooks/useStore";
 import classes from "./NavLink.module.css";
 import { useRouter } from "next/navigation";
+import { UserInformationButton } from "../ui";
 
 interface ChatApplicationShellProps {
   userEmail: string | null;
@@ -31,6 +32,7 @@ export function ChatApplicationShell({ userEmail }: ChatApplicationShellProps) {
   // handling chat navigation by redirecting url and changing in-state chat_id
   const handleConversationRedirect = (chat_id: string) => {
     router.push(`/chat/${chat_id}`);
+    setIsLoading(true);
     setChatId(chat_id);
   };
 
@@ -84,7 +86,7 @@ export function ChatApplicationShell({ userEmail }: ChatApplicationShellProps) {
         <Group h="100%" px="md">
           <Burger opened={opened} onClick={toggleOpen} visibleFrom="sm" size="sm" color="white" />
           <Text size="lg" fw={700} c="#919191ff">
-            AI CODE REVIEWER
+            AI CODE REVIEWER - Ryan Blaisdell
           </Text>
         </Group>
       </AppShell.Header>
@@ -115,14 +117,18 @@ export function ChatApplicationShell({ userEmail }: ChatApplicationShellProps) {
           h="100%"
           type="auto"
           scrollbarSize={12}
-          scrollHideDelay={0}
+          scrollHideDelay={500}
+          offsetScrollbars
           styles={{
             scrollbar: {
               background: "transparent",
             },
+            thumb: {
+              background: "#1b1b1bff",
+              borderRadius: 6,
+            },
           }}
           className="mt-0"
-          offsetScrollbars
         >
           <Text size="sm" c="dimmed" mb="xs" ml="sm" mt="xs">
             Past Conversations
@@ -158,6 +164,7 @@ export function ChatApplicationShell({ userEmail }: ChatApplicationShellProps) {
             </Box>
           )}
         </ScrollArea>
+        <UserInformationButton />
       </AppShell.Navbar>
 
       <AppShell.Main

@@ -19,7 +19,6 @@ export async function POST(request: Request) {
     });
 
     const responseBody = await response.json();
-    console.log("Received response:", responseBody);
 
     if (!response.ok) {
       return NextResponse.json({ error: responseBody.detail }, { status: response.status });
